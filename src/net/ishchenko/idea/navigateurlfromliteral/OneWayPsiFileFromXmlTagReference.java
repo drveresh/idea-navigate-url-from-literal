@@ -1,4 +1,4 @@
-package net.ishchenko.idea.navigatefromliteral;
+package net.ishchenko.idea.navigateurlfromliteral;
 
 import com.intellij.psi.xml.XmlTag;
 import org.jetbrains.annotations.NotNull;

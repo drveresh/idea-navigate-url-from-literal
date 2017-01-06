@@ -1,4 +1,4 @@
-package net.ishchenko.idea.navigatefromliteral;
+package net.ishchenko.idea.navigateurlfromliteral;
 
 import com.intellij.psi.*;
 import com.intellij.psi.impl.JavaConstantExpressionEvaluator;
