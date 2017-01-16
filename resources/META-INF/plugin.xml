@@ -1,18 +1,24 @@
 <idea-plugin version="2">
 
-    <id>navigate-url-from-literal</id>
-    <name>Navigate Url From Literal</name>
+    <id>navigate-to-url</id>
+    <name>Navigate to URL</name>
     <version>1.0-SNAPSHOT</version>
 
     <vendor email="tom.wadzinski+intellij@gmail.com" url="https://github.com/twadzins/idea-navigate-url-from-literal">Tom Wadzinski</vendor>
 
     <description><![CDATA[
-
-        Enables navigation from any matching string literal or xml attribute value or xml text to a url defined by url rules.
-        To create url rules, create a file called navigate-url-plugin.properties at the root of any module.
-        Example file contents (This would make a string like "GD16-123", when clicked, navigate to ttps://mysite.atlassian.net/browse/GD16-123:
-        url1.startsWith=GD16-
-        url1.navigateTo=https://mysite.atlassian.net/browse/{0}
+        Enables navigation from any matching string literal or xml attribute value or xml element text to a url defined by url rules.<br/>
+        This, for instance, makes a string anywhere in the code like "GD-123", when clicked, navigate to https://mysite.atlassian.net/browse/GD-123<br/>
+        <br/>
+        To create url rules, create a file called navigate-url-plugin.properties at the root of any module.<br/>
+        <br/>
+        Example "navigate-url-plugin.properties" file contents :<br/>
+        url1.startsWith=GD-<br/>
+        url1.navigateTo=https://mysite.atlassian.net/browse/{0}<br/>
+        <br/>
+        The source code uses code from the existing plugin: ishchenko/idea-navigate-from-literal. <br/>
+        <br/>
+        TODO: Support the traditional configuration UI, if requested by plugin users. The author's use case is for a team where using the normal shared intellij plugin configuration isn't an option. Using a project config file instead provides the shared config automatically for all team members.
 
     ]]>
     </description>
@@ -29,7 +35,7 @@
     <depends>com.intellij.modules.lang</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <psi.referenceContributor implementation="net.ishchenko.idea.navigateurlfromliteral.FileReferenceContributor"/>
-        <postStartupActivity implementation="net.ishchenko.idea.navigateurlfromliteral.PluginStartupActivity"></postStartupActivity>
+        <psi.referenceContributor implementation="com.wnrconsulting.navigateurlfromliteral.FileReferenceContributor"/>
+        <postStartupActivity implementation="com.wnrconsulting.navigateurlfromliteral.PluginStartupActivity"/>
     </extensions>
 </idea-plugin>

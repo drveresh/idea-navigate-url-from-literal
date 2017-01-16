@@ -1,4 +1,4 @@
-package net.ishchenko.idea.navigateurlfromliteral;
+package com.wnrconsulting.navigateurlfromliteral;
 
 import com.intellij.ide.plugins.IdeaPluginDescriptor;
 import com.intellij.ide.plugins.PluginManager;

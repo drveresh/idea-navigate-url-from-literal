@@ -1,4 +1,4 @@
-package net.ishchenko.idea.navigateurlfromliteral;
+package com.wnrconsulting.navigateurlfromliteral;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -8,8 +8,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.startup.StartupActivity;
 import com.intellij.openapi.vfs.VirtualFile;
-
-import static net.ishchenko.idea.navigateurlfromliteral.OneWayPsiFileReferenceBase.linkRules;
 
 /**
  * This is our sample StartupActivity used to execute code on project open.
@@ -37,7 +35,7 @@ public class PluginStartupActivity implements StartupActivity {
                             if (stringPropertyNames.contains(startsWithKey)) {
                                 navigateTo = properties.getProperty(navigateToKey);
                                 startsWith = properties.getProperty(startsWithKey);
-                                linkRules.add(new LinkRule(navigateTo, startsWith));
+                                OneWayPsiFileReferenceBase.linkRules.add(new LinkRule(navigateTo, startsWith));
                             }
                         }
                     }

@@ -1,7 +1,6 @@
-package net.ishchenko.idea.navigateurlfromliteral;
+package com.wnrconsulting.navigateurlfromliteral;
 
 import com.intellij.ide.BrowserUtil;
-import com.intellij.ide.browsers.BrowserLauncher;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
 import com.intellij.navigation.ItemPresentation;
@@ -18,7 +17,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,12 +38,10 @@ public abstract class OneWayPsiFileReferenceBase<T extends PsiElement> extends P
     @NotNull
     @Override
     public ResolveResult[] multiResolve(boolean incompleteCode) {
-        System.out.println("multiResolve 1");
         String cleanFileName = computeStringValue();
         String url = null;
         for (LinkRule linkRule : linkRules) {
             if (cleanFileName.toLowerCase().startsWith(linkRule.getStartsWith().toLowerCase())) {
-                System.out.println("multiResolve 2");
                 url = linkRule.getNavigateTo().replace("{0}", cleanFileName);
                 break;
             }
@@ -57,16 +53,14 @@ public abstract class OneWayPsiFileReferenceBase<T extends PsiElement> extends P
             result[0] = new PsiElementResolveResult(new MyNavigatablePsiElement() {
                 @Override
                 public void navigate(boolean b) {
+                    //Not sure thread is needed, is an attempt to avoid an issue where the browser doesn't gain focus when link is clicked
                     new Thread(){
                         @Override
                         public void run() {
                             try {
-                                System.out.println("multiResolve 4");
 
-                                Thread.sleep(1000); //seems to make the focus change to the browser
-                                System.out.println("multiResolve 5");
+                                Thread.sleep(1000); //seems to help avoid an issue where the browser doesn't gain focus when link is clicked.
                                 BrowserUtil.browse(new URI(finalUrl));
-                                System.out.println("multiResolve 6");
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -81,7 +75,6 @@ public abstract class OneWayPsiFileReferenceBase<T extends PsiElement> extends P
                 }
             }
             );
-            System.out.println("multiResolve 3");
             return result;
         }
         return new ResolveResult[0];
@@ -122,7 +115,7 @@ public abstract class OneWayPsiFileReferenceBase<T extends PsiElement> extends P
         @Nullable
         @Override
         public String getName() {
-            return "N/a";
+            return "N/A";
         }
 
         @Nullable

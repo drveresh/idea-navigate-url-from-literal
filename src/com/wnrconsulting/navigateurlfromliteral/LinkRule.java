@@ -1,4 +1,4 @@
-package net.ishchenko.idea.navigateurlfromliteral;
+package com.wnrconsulting.navigateurlfromliteral;
 
 public class LinkRule {
     private String startsWith;
